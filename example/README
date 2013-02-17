@@ -1,0 +1,6 @@
+
+This is a example shows how to use hotfix.
+./server_to_patch is the app to apply hotfix
+./patch contains patch to apply.
+
+

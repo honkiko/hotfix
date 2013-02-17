@@ -1,0 +1,14 @@
+
+Backlog:
+>>>		IA-32 support
+>>		check the size of original function
+>>		encode short jmp instruction for x86-64
+			- map the patch near the .text
+>>		hotfix executable to pass soname to app
+>>		code injection to install hofix on the fly
+>>		staticly relocation symbols in app which are called in patch 
+>		backup the written code for restore
+>		patch uninstall
+
+Done:
+>>>		Prototype which requires link libhotfix.a and call hotfix_init() for app.
