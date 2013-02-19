@@ -30,6 +30,10 @@ static int load_hotfix(char *soname)
     char *error;
     int ret;
 
+    if (soname == NULL) {
+        return -1;
+    }
+
     handle = dlopen(soname, RTLD_LAZY);
     if (!handle) {
         fprintf(stderr, "%s\n", dlerror());

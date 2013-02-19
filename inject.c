@@ -26,6 +26,9 @@ struct jmp_abs_indirect {
 };
 
 int encode_jmp(void *addr_to_write, void *jmp_target) {
+    if (addr_to_write == NULL || jmp_target == NULL) {
+        return -1;
+    }
     int page_size = sysconf(_SC_PAGESIZE);
     void *write_page = (void *)PAGE_ALIGN(addr_to_write, page_size);
     int ret = mprotect(write_page, page_size, 
