@@ -11,11 +11,13 @@
 
 
 #define OPCODE_JMP_NEAR_RELATIVE 0xE9
+/* this works for both 32 and 64 bit*/
 struct jmp_near_relative {
     unsigned char opcode; //0xE9
     unsigned char disp32[4];
 };
 
+/* only for 64bit*/
 struct jmp_abs_indirect {
     unsigned char opcode; //0xFF
     unsigned char mod; //0x25
@@ -37,7 +39,7 @@ int encode_jmp(void *addr_to_write, void *jmp_target) {
    intptr_t relative_addr = (char *)jmp_target 
        - ((char *)addr_to_write + sizeof(struct jmp_near_relative)); 
    if (labs(relative_addr) > (uint32_t)0xffffffff) {
-        printf("jmp more than 32 bits offset: %ld\n", relative_addr);
+        //printf("jmp more than 32 bits offset: %ld\n", relative_addr);
         struct jmp_abs_indirect *jmp_abs = 
             (struct jmp_abs_indirect *)addr_to_write;
         jmp_abs->opcode = 0xff;

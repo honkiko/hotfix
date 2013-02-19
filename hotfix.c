@@ -5,23 +5,22 @@
 #include "inject.h" 
 #include "hotfix.h" 
 
-//#define HOTFIX_SIG SIGUSR2
-#define HOTFIX_SIG SIGINT
+#define HOTFIX_SIG SIGUSR2
 
+static int load_hotfix(char *soname);
 void hotfix_sighdl(int iSignNo)
 {
-    hotfix("./patch.so");
+    load_hotfix("./patch.so");
 }
 
 //void __attribute__((constructor)) hotfix_init(void){
 void hotfix_init(void){
    signal(HOTFIX_SIG, hotfix_sighdl);
-   printf("hotfix_sighdl(%d) installed\n", HOTFIX_SIG);
 }
 
 
 #define HOTFIX_TABLE_SYMBOL "hotfix_table"
-int hotfix(char *soname) 
+static int load_hotfix(char *soname) 
 {
     void *handle;
     int (*patch_func)(int);
@@ -54,8 +53,10 @@ int hotfix(char *soname)
         exit(EXIT_FAILURE);
     }
 
+    /*
     fprintf(stderr, "orig_func=%p, patch_func=%p\n", 
             patches->orig_func, patches->patch_func);
+    */
     
     //now inject jmp to original func
     ret = encode_jmp(patches->orig_func, patches->patch_func);

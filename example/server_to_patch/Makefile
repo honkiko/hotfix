@@ -21,6 +21,9 @@ OBJS = $(SRCS:.c=.o)
 
 all: $(EXE) 
 
+$(HOTFIX_LIB):
+	make all -C ../.. 
+
 %.o: %.c 
 	gcc $(PPFLAGS) $(CCFLAGS) -c $<
 

@@ -3,7 +3,7 @@
 
 extern int funcA(int);
 int funcA_1(int x) {
-    printf("It's in funcA_1\n");
+    printf("It's patched version of funcA\n");
     return funcB(x) * funcC(x);
 }
 

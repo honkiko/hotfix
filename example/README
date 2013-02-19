@@ -3,4 +3,12 @@ This is a example shows how to use hotfix.
 ./server_to_patch is the app to apply hotfix
 ./patch contains patch to apply.
 
+Steps:
+1) enter ./server_to_patch and make. 
+2) execute ./server_to_patch/server.x
+3) input number and press enter, funcA() will be called, and the result is displayed.
+4) enter dir ./patch and make, this produces patch.so
+5) run the hotfix.sh under root dir of this project
+6) input number and press enter again, the patched funcA() will be called.
+
 
